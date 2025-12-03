@@ -1,0 +1,15 @@
+<form action="{% url 'tracker:modify' product.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ product.product_name }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <ul>
+        <li>{{ product.product_type }}</li>
+        <li>{{ product.entry_date }}</li>
+        <li>{{ product.amount }}</li>
+    </ul>
+    <label for="quantity">Choose amount to edit:</label>
+    <input type="number" id="amount" name="amount" value="0">
+</fieldset>
+<input type="submit" value="Update">
+</form>             
