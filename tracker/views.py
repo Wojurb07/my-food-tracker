@@ -8,10 +8,18 @@ from .models import Product
 class IndexView(generic.ListView):
     template_name = "tracker/index.html"
     context_object_name = "product_list"
+    fields = ["Product", "Type", "Date", "Amount"]
+
     def get_queryset(self):
         """Return the list of products."""
         return Product.objects.order_by("amount")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['fields'] = self.fields
+        return context
+
+    
 class DetailView(generic.DetailView):
     model = Product
     template_name = "tracker/detail.html"

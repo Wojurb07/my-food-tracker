@@ -1,13 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'tracker/style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="{% static 'tracker/style.css' %}">
+</head>
 
-{% if product_list %}
-    <ul>
-    {% for product in product_list %}
-        <li><a href="{% url 'tracker:detail' product.id %}">{{ product.product_name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No products are available.</p>
-{% endif %}
+<body>
+<div class="box">
+    <header>Your products</header>
+
+    {% if product_list %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    {% for col in fields %}
+                        <th>{{ col|capfirst }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in product_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'tracker:detail' product.id %}">
+                            {{ product.product_name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'tracker:detail' product.id %}">
+                            {{ product.product_type }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'tracker:detail' product.id %}">
+                            {{ product.entry_date }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'tracker:detail' product.id %}">
+                            {{ product.amount }}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No products are available.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
