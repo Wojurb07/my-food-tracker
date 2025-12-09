@@ -1,59 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 {% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-    <link rel="stylesheet" href="{% static 'tracker/style.css' %}">
-</head>
+{% block title %}
+    Products
+{% endblock %}
 
-<body>
+{% block content %}
+
 <div class="box">
     <header>Your products</header>
 
     {% if product_list %}
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    {% for col in fields %}
-                        <th>{{ col|capfirst }}</th>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in fields %}
+                            <th>{{ col|capfirst }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in product_list %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'tracker:detail' product.id %}">
+                                    {{ product.product_name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'tracker:detail' product.id %}">
+                                    {{ product.product_type }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'tracker:detail' product.id %}">
+                                    {{ product.entry_date }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'tracker:detail' product.id %}">
+                                    {{ product.amount }}
+                                </a>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in product_list %}
-                <tr>
-                    <td>
-                        <a href="{% url 'tracker:detail' product.id %}">
-                            {{ product.product_name }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'tracker:detail' product.id %}">
-                            {{ product.product_type }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'tracker:detail' product.id %}">
-                            {{ product.entry_date }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'tracker:detail' product.id %}">
-                            {{ product.amount }}
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <p>No products are available.</p>
     {% endif %}
 </div>
 
-</body>
-</html>
+<div id="visitcounter">
+    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+</div>
+
+{% endblock %}

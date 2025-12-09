@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from .models import Product
+
 # Create your views here.
 class IndexView(generic.ListView):
     template_name = "tracker/index.html"
@@ -17,8 +18,14 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['fields'] = self.fields
-        return context
+        
+        # Number of visits to this view, counted in the session variable
+        num_visits = self.request.session.get('num_visits', 0)
+        num_visits += 1 
+        self.request.session['num_visits'] = num_visits
+        context['num_visits'] = num_visits
 
+        return context
     
 class DetailView(generic.DetailView):
     model = Product

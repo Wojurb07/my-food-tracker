@@ -1,60 +1,166 @@
+/* =========================================================
+   GLOBAL RESET + TYPOGRAPHY
+   ========================================================= */
 body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
     background: url("images/background.jpg") no-repeat center center fixed;
     background-size: cover;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
     height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
 }
 
-/* Centered box */
+/* =========================================================
+   LAYOUT ELEMENTS
+   ========================================================= */
+
+.navbar {
+    background: rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  color: #9c9c9c;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Main content box shared between index/detail pages */
 .box {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
     width: 500px;
     height: 600px;
+
     text-align: center;
+
     display: flex;
     flex-direction: column;
 }
 
+/* Page header (inside .box) */
 header {
-    font-size: xx-large;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-/* --- Scrollable table container --- */
+/* =========================================================
+   TABLES (used by index + detail pages)
+   ========================================================= */
+
 .table-container {
-    flex: 1;                /* fills remaining space */
-    overflow-y: auto;       /* enables scroll */
+    flex: 1; 
+    overflow-y: auto;
 }
 
-/* --- Table styling --- */
+/* Base table styles */
 table {
     width: 100%;
     border-collapse: collapse;
-    padding-bottom: 100px;
     color: black;
 }
 
+/* Header row */
 th {
     border-bottom: 1px solid #7a7979;
-    padding: 15px;
+    padding: 12px;
     background: #f4f4f4;
+
     position: sticky;
-    top: 0;                 /* keeps header visible */
+    top: 0;
 }
 
+/* Cells */
 td, tr {
     border-bottom: 1px solid #7a7979;
-    padding: 15px;
+    padding: 12px;
 }
 
+/* Hover effect for clickable rows */
 tr:hover {
     background: rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================================
+   FORMS (used in detail page)
+   ========================================================= */
+
+.edit-form {
+    margin-top: 20px;
+}
+
+.edit-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.edit-form input[type="number"] {
+    width: 150px;
+    padding: 6px;
+    margin-bottom: 12px;
+}
+
+.edit-form input[type="submit"] {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-form input[type="submit"]:hover {
+    background: #45a049;
+}
+
+/* =========================================================
+   UTILITY CLASSES
+   ========================================================= */
+
+/* Error message */
+.error {
+    color: darkred;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Visit counter (index page) */
+#visitcounter {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+
+    background: rgba(255,255,255,0.7);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
 }

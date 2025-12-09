@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<form action="{% url 'tracker:modify' product.id %}" method="post">
-{% csrf_token %}
+{% extends "base.html" %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>Product - {{ product.product_name }}</title>
-    <link rel="stylesheet" href="{% static 'tracker/style.css' %}">
-</head>
+
+{% block title %}
+    Product – {{ product.product_name }}
+{% endblock %}
+
+{% block content %}
 
 <div class="box">
-    <header>  {{product.product_name}} </header>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <table>
+    <header>{{ product.product_name }}</header>
+
+    {% if error_message %}
+        <p class="error"><strong>{{ error_message }}</strong></p>
+    {% endif %}
+
+    <table class="detail-table">
         <tr>
-            <td>Product type:</td>
+            <td class="label">Product type:</td>
             <td>{{ product.product_type }}</td>
         </tr>
         <tr>
-            <td>Date of entry:</td>
+            <td class="label">Date of entry:</td>
             <td>{{ product.entry_date }}</td>
         </tr>
         <tr>
-            <td>Amount:</td>
+            <td class="label">Amount:</td>
             <td>{{ product.amount }}</td>
         </tr>
     </table>
-<label for="quantity">Choose amount to edit:</label>
-<input type="number" id="amount" name="amount" value="0">
-<input type="submit" value="Update">
+
+    <form action="{% url 'tracker:modify' product.id %}" method="post" class="edit-form">
+        {% csrf_token %}
+        <label for="amount">Choose amount to edit:</label>
+        <input type="number" id="amount" name="amount" value="0">
+        <input type="submit" value="Update">
+    </form>
+
 </div>
-</form>
-</html>          
+
+{% endblock %}
