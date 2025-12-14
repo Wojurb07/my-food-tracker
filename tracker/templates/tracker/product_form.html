@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Add Product
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <form method="post" class="edit-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add">
+    </form>
+</div>
+{% endblock %}

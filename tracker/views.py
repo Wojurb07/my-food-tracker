@@ -1,9 +1,11 @@
 from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from .models import Product
+from django.utils import timezone
+from django.contrib import messages
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -18,7 +20,8 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['fields'] = self.fields
-        
+
+
         # Number of visits to this view, counted in the session variable
         num_visits = self.request.session.get('num_visits', 0)
         num_visits += 1 
@@ -49,3 +52,12 @@ def modify(request, product_id):
     product.refresh_from_db()
     return HttpResponseRedirect(reverse("tracker:detail", args=(product.id,)))
 
+class ProductCreateView(generic.CreateView):
+    model = Product
+    fields = ["product_name", "product_type", "amount"]
+    success_url = reverse_lazy("tracker:product_form")
+
+    def form_valid(self, form):
+        form.instance.entry_date = timezone.now().date()
+        messages.success(self.request, "Product added successfully!")
+        return super().form_valid(form)
