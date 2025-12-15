@@ -6,16 +6,33 @@ from django.views import generic
 from .models import Product
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-class IndexView(generic.ListView):
-    template_name = "tracker/index.html"
+@login_required
+def index(request):
+    # Get some general summary information for a logged in user
+    num_products = Product.objects.filter(owner = request.user).count()
+    three_latest_product = Product.objects.filter(owner = request.user).order_by("-entry_date")[:3]
+    owner = request.user
+
+    context = {
+        'owner' : owner,
+        'num_products' : num_products,
+        'three_latest_product' : three_latest_product,
+    } 
+    
+    return render(request, 'tracker/index.html', context=context)
+
+class ProductsView(LoginRequiredMixin, generic.ListView):
+    template_name = "tracker/products.html"
     context_object_name = "product_list"
     fields = ["Product", "Type", "Date", "Amount"]
 
     def get_queryset(self):
-        """Return the list of products."""
-        return Product.objects.order_by("amount")
+        """Return the list of products for a logged user."""
+
+        return Product.objects.filter(owner=self.request.user).order_by("amount")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,10 +47,11 @@ class IndexView(generic.ListView):
 
         return context
     
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Product
     template_name = "tracker/detail.html"
-    
+
+@login_required    
 def modify(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     selected_amount = float(request.POST["amount"])
@@ -52,12 +70,14 @@ def modify(request, product_id):
     product.refresh_from_db()
     return HttpResponseRedirect(reverse("tracker:detail", args=(product.id,)))
 
-class ProductCreateView(generic.CreateView):
+class ProductCreateView(LoginRequiredMixin, generic.CreateView):
     model = Product
     fields = ["product_name", "product_type", "amount"]
     success_url = reverse_lazy("tracker:product_form")
 
     def form_valid(self, form):
         form.instance.entry_date = timezone.now().date()
+        form.instance.owner = self.request.user
+        
         messages.success(self.request, "Product added successfully!")
         return super().form_valid(form)

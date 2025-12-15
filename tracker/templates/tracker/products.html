@@ -2,26 +2,26 @@
 {% load static %}
 
 {% block title %}
-    Home
+    Products
 {% endblock %}
 
 {% block content %}
 
 <div class="box">
-    <header>Welcome to your e-Pantry, {{ owner }}! </header>
-    <p>There are {{ num_products }} products in your fridge.</p>
-    <p>These are 3 latest ones added:</p>
-    {% if three_latest_product %}
+    <header>Your products</header>
+
+    {% if product_list %}
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Product name</th>
-                        <th>Entry date</th>
+                        {% for col in fields %}
+                            <th>{{ col|capfirst }}</th>
+                        {% endfor %}
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in three_latest_product %}
+                    {% for product in product_list %}
                         <tr>
                             <td>
                                 <a href="{% url 'tracker:detail' product.id %}">
@@ -30,7 +30,17 @@
                             </td>
                             <td>
                                 <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.entry_date }}
+                                    {{ product.product_type }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'tracker:detail' product.id %}">
+                                    {{ product.entry_date|date:"SHORT_DATETIME_FORMAT" }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'tracker:detail' product.id %}">
+                                    {{ product.amount }}
                                 </a>
                             </td>
                         </tr>
@@ -41,7 +51,10 @@
     {% else %}
         <p>No products are available.</p>
     {% endif %}
-    <button><a href="{%url 'tracker:products' %}"> Open your fridge </a></button>
+</div>
+
+<div id="visitcounter">
+    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
 </div>
 
 {% endblock %}
