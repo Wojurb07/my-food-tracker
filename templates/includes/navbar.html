@@ -4,7 +4,7 @@
     <li><a href="{% url 'tracker:index' %}">Home</a></li>
     <li><a href="{% url 'tracker:products' %}">Products</a></li>
     <li><a href="{% url 'tracker:product_form' %}">Add products</a></li>
-    <li><a href="{% url 'tracker:index' %}">Analyze products</a></li>
+    <li><a href="{% url 'tracker:chart' %}">Analyze products</a></li>
       {% if user.is_authenticated %}
           <li><a href="{% url 'tracker:index' %}">Add products with AI</a></li>
           <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>

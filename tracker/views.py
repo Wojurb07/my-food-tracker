@@ -8,26 +8,64 @@ from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+import plotly.express as px
+import pandas as pd
+
 
 @login_required
 def index(request):
     # Get some general summary information for a logged in user
-    num_products = Product.objects.filter(owner = request.user).count()
-    three_latest_product = Product.objects.filter(owner = request.user).order_by("-entry_date")[:3]
-    owner = request.user
+    num_products = Product.objects.filter(user = request.user).count()
+    three_latest_product = Product.objects.filter(user = request.user).order_by("-created_at")[:3]
+    user = request.user
 
     context = {
-        'owner' : owner,
+        'user' : user,
         'num_products' : num_products,
         'three_latest_product' : three_latest_product,
     } 
     
     return render(request, 'tracker/index.html', context=context)
 
+@login_required    
+def modify(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    selected_amount = float(request.POST["amount"])
+
+    if product.amount + selected_amount < 0:
+        return render(
+            request,
+            "tracker/detail.html",
+            {
+                "product": product,
+                "error_message": "The amount after updating can't be negative.",
+            },
+        )
+    
+    product.amount = F("amount") + selected_amount
+    product.save()
+    product.refresh_from_db()
+    return HttpResponseRedirect(reverse("tracker:detail", args=(product.id,)))
+
+@login_required
+def chart(request):
+    products = Product.objects.filter(owner=request.user)
+
+    fig = px.pie( 
+        values = [product.amount for product in products],
+        names = [product.product_type for product in products],
+        title = "What's in the fridge"
+    )
+
+    chart = fig.to_html()
+
+    context = { 'chart' : chart}
+    return render(request, "tracker/chart.html", context)
+
 class ProductsView(LoginRequiredMixin, generic.ListView):
     template_name = "tracker/products.html"
     context_object_name = "product_list"
-    fields = ["Product", "Type", "Date", "Amount"]
+    fields = ["Product", "Type", "Date"]
 
     def get_queryset(self):
         """Return the list of products for a logged user."""
@@ -51,33 +89,15 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Product
     template_name = "tracker/detail.html"
 
-@login_required    
-def modify(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    selected_amount = float(request.POST["amount"])
-
-    if product.amount + selected_amount < 0:
-        return render(
-            request,
-            "tracker/detail.html",
-            {
-                "product": product,
-                "error_message": "The amount after updating can't be negative.",
-            },
-        )
-    product.amount = F("amount") + selected_amount
-    product.save()
-    product.refresh_from_db()
-    return HttpResponseRedirect(reverse("tracker:detail", args=(product.id,)))
 
 class ProductCreateView(LoginRequiredMixin, generic.CreateView):
     model = Product
-    fields = ["product_name", "product_type", "amount"]
+    fields = ["product_name", "reference"]
     success_url = reverse_lazy("tracker:product_form")
 
     def form_valid(self, form):
-        form.instance.entry_date = timezone.now().date()
-        form.instance.owner = self.request.user
+        form.instance.created_at = timezone.now()
+        form.instance.user = self.request.user
         
         messages.success(self.request, "Product added successfully!")
         return super().form_valid(form)

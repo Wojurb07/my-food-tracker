@@ -1,0 +1,6 @@
+
+*.sqlite3
+*.csv
+.DS_Store
+.DS_Store?
+manage.py
