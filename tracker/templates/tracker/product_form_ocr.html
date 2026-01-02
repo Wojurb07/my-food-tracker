@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Upload Receipt
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <header> Add the receipt image </header>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value="Upload Image">
+    </form>
+</div>
+{% endblock %}

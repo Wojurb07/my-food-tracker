@@ -18,10 +18,6 @@ df = data[0]
 df['Referencja'] = df['Referencja'].apply(str)
 df['EAN'] = df['EAN'].apply(str)
 
-print(df.head())
-print(df.shape)
-print(df.describe())
-
 for tag in tags:
     ref = tag.get('href', None).split('/')[-1]
     df['Dane Produktowe'][df['Referencja']==ref] = tag.get('href', None)

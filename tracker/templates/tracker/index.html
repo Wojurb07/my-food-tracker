@@ -8,10 +8,21 @@
 {% block content %}
 
 <div class="box">
-    <header>Welcome to your e-Pantry, {{ owner }}! </header>
-    <p>There are {{ num_products }} products in your fridge.</p>
-    <p>These are three latest ones added:</p>
-    {% if three_latest_product %}
+    <header>Welcome to your e-Pantry, {{ user }}!</header>
+
+    {% if num_products == 0 %}
+        <p>No products are available.</p>
+    {% else %}
+        <p>
+            There {{ num_products|pluralize:"is,are" }}
+            {{ num_products }} product{{ num_products|pluralize }}
+            in your fridge.
+        </p>
+
+        <p>
+            {{ num_products|pluralize:"These are,This is" }} the latest product{{ num_products|pluralize }} added:
+        </p>
+
         <div class="table-container">
             <table>
                 <thead>
@@ -24,13 +35,13 @@
                     {% for product in three_latest_product %}
                         <tr>
                             <td>
-                                <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.product_name }}
+                                <a href="{% url 'tracker:detail' product.product_id %}">
+                                    {{ product.reference.product_name }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.entry_date }}
+                                <a href="{% url 'tracker:detail' product.product_id %}">
+                                    {{ product.created_at }}
                                 </a>
                             </td>
                         </tr>
@@ -38,10 +49,9 @@
                 </tbody>
             </table>
         </div>
-    {% else %}
-        <p>No products are available.</p>
     {% endif %}
-    <button><a href="{%url 'tracker:products' %}"> Open your fridge </a></button>
+
+    <button><a href="{% url 'tracker:products' %}">Open your fridge</a></button>
 </div>
 
 {% endblock %}

@@ -15,32 +15,33 @@
             <table>
                 <thead>
                     <tr>
-                        {% for col in fields %}
-                            <th>{{ col|capfirst }}</th>
-                        {% endfor %}
+                        <th>Reference</th>
+                        <th>Product name</th>
+                        <th>Category</th>
+                        <th>Entry date</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for product in product_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.product_name }}
+                                <a href="{% url 'tracker:detail' product.product_id %}">
+                                    {{ product.reference.reference }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.product_type }}
+                                <a href="{% url 'tracker:detail' product.product_id %}">
+                                    {{ product.reference.product_name }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.entry_date|date:"SHORT_DATETIME_FORMAT" }}
+                                <a href="{% url 'tracker:detail' product.product_id %}">
+                                    {{ product.reference.productdetails.category }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'tracker:detail' product.id %}">
-                                    {{ product.amount }}
+                                <a href="{% url 'tracker:detail' product.product_id %}">
+                                    {{ product.created_at|date:"SHORT_DATETIME_FORMAT" }}
                                 </a>
                             </td>
                         </tr>

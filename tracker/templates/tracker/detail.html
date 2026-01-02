@@ -2,40 +2,75 @@
 {% load static %}
 
 {% block title %}
-    Product – {{ product.product_name }}
+    {{ product.reference.product_name }}
 {% endblock %}
 
 {% block content %}
 
 <div class="box">
-    <header>{{ product.product_name }}</header>
-
+    <header>{{ product.reference.product_name }}</header>
     {% if error_message %}
         <p class="error"><strong>{{ error_message }}</strong></p>
     {% endif %}
 
     <table class="detail-table">
         <tr>
-            <td class="label">Product type:</td>
-            <td>{{ product.product_type }}</td>
+            <td class="label">Product reference:</td>
+            <td>{{ product.reference }}</td>
+        </tr>
+        <tr>
+            <td class="label">Brand:</td>
+            <td>{{ product.reference.productdetails.product_brand }}</td>
+        </tr>
+        <tr>
+            <td class="label">Product weight in {{product.reference.productdetails.product_measurement}}:</td>
+            <td>{{ product.reference.productdetails.product_weight }}</td>
+        </tr>
+        <tr>
+            <td class="label">Product category:</td>
+            <td>{{ product.reference.productdetails.category }}</td>
         </tr>
         <tr>
             <td class="label">Date of entry:</td>
-            <td>{{ product.entry_date }}</td>
-        </tr>
-        <tr>
-            <td class="label">Amount:</td>
-            <td>{{ product.amount }}</td>
+            <td>{{ product.created_at }}</td>
         </tr>
     </table>
 
-    <form action="{% url 'tracker:modify' product.id %}" method="post" class="edit-form">
-        {% csrf_token %}
-        <label for="amount">Choose amount to edit:</label>
-        <input type="number" id="amount" name="amount" value="0">
-        <input type="submit" value="Update">
-    </form>
+    {% if product.reference.productdetails.category == "Food"%}
+    <div>Nutrition values in 100g</div>
+    <table class="detail-table">
+        <tr>
+            <td class="label">Calories</td>
+            <td>{{ product.reference.productdetails.calories }}</td>
+        </tr>
+        <tr>
+            <td class="label">Fats</td>
+            <td>{{ product.reference.productdetails.fats }}</td>
+        </tr>
+        <tr>
+            <td class="label">Carbohydrates</td>
+            <td>{{ product.reference.productdetails.carbohydrates }}</td>
+        </tr>
+        <tr>
+            <td class="label">Sugar</td>
+            <td>{{ product.reference.productdetails.sugar }}</td>
+        </tr>
+        <tr>
+            <td class="label">Protein</td>
+            <td>{{ product.reference.productdetails.protein }}</td>
+        </tr>
+        <tr>
+            <td class="label">Salt</td>
+            <td>{{ product.reference.productdetails.salt }}</td>
+        </tr>
+    </table>
+    {% endif %}
 
+    <div class="actions">
+    <a href="{% url 'tracker:remove_product' product.product_id %}" class="btn">
+        Remove product
+    </a>
+</div>
 </div>
 
 {% endblock %}

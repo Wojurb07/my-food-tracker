@@ -1,0 +1,130 @@
+2025-12-23 21:06:27,221 - doctr-labeler-logger - INFO - Loading model from OnnxTR: fast_base
+2025-12-23 21:06:27,221 - doctr-labeler-logger - INFO - Loading model from HF hub: Felix92/onnxtr-parseq-multilingual-v1
+2025-12-23 21:11:37,913 - doctr-labeler-logger - INFO - AutoLabeler objectness threshold set to: 0.5
+2025-12-23 21:11:52,253 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:12:09,656 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:12:09,835 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:12:09,989 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:12:12,266 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:12:12,964 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:12:52,021 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:12:52,676 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:13:41,107 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6242.JPG
+2025-12-23 21:13:42,150 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6243.JPG
+2025-12-23 21:13:42,903 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6244.JPG
+2025-12-23 21:13:44,109 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6242.JPG
+2025-12-23 21:13:44,196 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6243.JPG
+2025-12-23 21:13:44,913 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:13:47,399 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:13:47,671 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:13:47,824 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:13:48,045 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:13:48,715 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:14:02,980 - doctr-labeler-logger - INFO - Auto annotating image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:14:07,575 - doctr-labeler-logger - INFO - Total Polygons drawn: 159
+2025-12-23 21:15:39,865 - doctr-labeler-logger - INFO - Agjust polygons for 0 selected polygons
+2025-12-23 21:15:42,372 - doctr-labeler-logger - INFO - Agjust polygons for 0 selected polygons
+2025-12-23 21:15:44,372 - doctr-labeler-logger - INFO - Agjust polygons for 0 selected polygons
+2025-12-23 21:15:48,310 - doctr-labeler-logger - INFO - Agjust polygons for 0 selected polygons
+2025-12-23 21:15:55,329 - doctr-labeler-logger - INFO - Agjust polygons for 0 selected polygons
+2025-12-23 21:16:06,245 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6242.JPG
+2025-12-23 21:16:07,169 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:16:11,085 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:16:11,348 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:16:11,501 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:16:11,713 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:16:11,908 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:16:20,077 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:16:20,376 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:16:20,821 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:16:21,117 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:16:21,765 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:16:21,916 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:16:22,129 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:16:22,322 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:16:26,849 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:16:27,085 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:16:27,264 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:16:27,469 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:16:27,610 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.0
+2025-12-23 21:16:27,992 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.1
+2025-12-23 21:16:28,417 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.2
+2025-12-23 21:16:28,819 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.3
+2025-12-23 21:16:29,145 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.2
+2025-12-23 21:16:29,426 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.1
+2025-12-23 21:16:29,565 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=1.0
+2025-12-23 21:16:29,768 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:16:29,945 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:16:30,183 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:16:30,394 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:16:30,502 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:16:49,066 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6242.JPG
+2025-12-23 21:16:49,935 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6243.JPG
+2025-12-23 21:16:51,495 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6244.JPG
+2025-12-23 21:16:56,688 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:16:56,978 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:16:57,290 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:16:57,848 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:16:58,431 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:27:09,418 - doctr-labeler-logger - INFO - Loading model from OnnxTR: fast_base
+2025-12-23 21:27:09,418 - doctr-labeler-logger - INFO - Loading model from HF hub: Felix92/onnxtr-parseq-multilingual-v1
+2025-12-23 21:27:10,912 - doctr-labeler-logger - INFO - AutoLabeler objectness threshold set to: 0.5
+2025-12-23 21:28:04,115 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:28:09,426 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:28:10,020 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:28:10,585 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:28:11,063 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:28:11,173 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:28:29,478 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6242.JPG
+2025-12-23 21:28:30,503 - doctr-labeler-logger - INFO - Loaded image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:28:35,736 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.9
+2025-12-23 21:28:35,916 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.8
+2025-12-23 21:28:36,068 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.7
+2025-12-23 21:28:36,196 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.6
+2025-12-23 21:28:36,303 - doctr-labeler-logger - INFO - Zoom applied: scale_factor=0.5
+2025-12-23 21:28:52,820 - doctr-labeler-logger - INFO - Polygon drawn
+2025-12-23 21:28:52,822 - doctr-labeler-logger - INFO - Added polygon. Total: 1
+2025-12-23 21:28:52,988 - doctr-labeler-logger - INFO - Agjust polygons for 1 selected polygons
+2025-12-23 21:28:56,209 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:28:58,204 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:01,199 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:03,009 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:12,727 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:13,936 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:18,190 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:19,077 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:22,806 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:24,492 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:29:25,482 - doctr-labeler-logger - INFO - Auto annotating image: /Users/wojtek/my_food_tracker/ocr-data/IMG_6240.JPG
+2025-12-23 21:29:29,869 - doctr-labeler-logger - INFO - Total Polygons drawn: 159
+2025-12-23 21:29:53,890 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:06,657 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:10,171 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:11,692 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:15,481 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:43,298 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:53,721 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:54,654 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:55,155 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:30:56,068 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:01,894 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:04,942 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:09,599 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:10,897 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:11,564 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:15,569 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:19,865 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:21,103 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:21,545 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:24,462 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:25,424 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:25,985 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:26,607 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:28,554 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:31,628 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:32,029 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:32,554 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:35,013 - doctr-labeler-logger - INFO - Point not drawn because not drawing polygon
+2025-12-23 21:31:42,142 - doctr-labeler-logger - INFO - Polygon drawn
+2025-12-23 21:31:42,145 - doctr-labeler-logger - INFO - Added polygon. Total: 160
+2025-12-23 21:31:42,319 - doctr-labeler-logger - INFO - Agjust polygons for 1 selected polygons
