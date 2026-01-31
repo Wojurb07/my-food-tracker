@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Confirm Input
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <header> Modify input </header>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            {% if found_products %}
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>Reference</th>
+                                <th>Keep</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in found_products %}
+                                <tr>
+                                    <td>
+                                        {{ product.product_name }}
+                                    </td>
+                                    <td>
+                                        {{ product.reference }}
+                                    </td>
+                                    <td><label>
+                                            <input
+                                            type="checkbox"
+                                            name="selected_products"
+                                            value="{{ product.reference }}"
+                                            checked
+                                            >
+                                        </label></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>No products were found.</p>
+            {% endif %}
+
+            {% if missing_products %}
+                <header>Products not found</header>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Reference</th>
+                                <th>Quantity</th>
+                                <th>Keep</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in missing_products %}
+                            <tr>
+                                <td>
+                                    {{ product.code }}
+                                </td>
+                                <td>
+                                    {{ product.quantity }}
+                                </td>
+                                <td>
+                                    <label>
+                                        <input
+                                        type="checkbox"
+                                        name="selected_products"
+                                        value="{{ product.code }}"
+                                        checked>
+                                    </label></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                    <p>All codes were identified.</p>
+                {% endif %}
+            </div>
+        <input type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}

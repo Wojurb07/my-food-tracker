@@ -17,7 +17,6 @@
                     <tr>
                         <th>Reference</th>
                         <th>Product name</th>
-                        <th>Category</th>
                         <th>Entry date</th>
                     </tr>
                 </thead>
@@ -32,11 +31,6 @@
                             <td>
                                 <a href="{% url 'tracker:detail' product.product_id %}">
                                     {{ product.reference.product_name }}
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'tracker:detail' product.product_id %}">
-                                    {{ product.reference.productdetails.category }}
                                 </a>
                             </td>
                             <td>

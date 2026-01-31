@@ -10,5 +10,6 @@ urlpatterns = [
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     path("<int:product_id>/remove_product/", views.removeProduct, name="remove_product"),
     path("add_product/", views.ProductAddView.as_view(), name="product_form"),
-    path("product_form_ocr/", views.ProductAddOcrView.as_view(), name="product_form_ocr")
+    path("product_form_ocr/", views.ProductAddOcrView.as_view(), name="product_form_ocr"),
+    path("product_form_ocr/ocr_form_confirmation/", views.OcrConfirmationView.as_view(), name="ocr_form_confirmation")
 ]

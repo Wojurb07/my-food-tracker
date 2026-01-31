@@ -42,59 +42,75 @@ def removeProduct(request, product_id):
 
 @login_required
 def chart(request):
-    products = Product.objects.filter(owner=request.user)
-    fig = px.pie( 
-        values = [product.amount for product in products],
-        names = [product.product_type for product in products],
-        title = "What's in the fridge"
-    )
-    chart = fig.to_html()
 
-    context = { 'chart' : chart}
+    context = { }
     return render(request, "tracker/chart.html", context)
-
-# 1. Create the view to hande the loading of input_form
-# 2. Create model to store the receipt
-# 3. Add view logic to save the receipt
-# 4. Setup the media file path
-# 5. Display the confirmation pop-up window with the potential result of products added 
 
 class ProductAddOcrView(LoginRequiredMixin, generic.View):
     
     def get(self, request):
         form = ReceiptForm()
-        context = {}
-        context['form'] = form
-        return render(request, "tracker/product_form_ocr.html", context)
+        return render(request, "tracker/product_form_ocr.html", {"form": form})
 
     def post(self, request):
         form = ReceiptForm(request.POST, request.FILES)
-        if form.is_valid():
-            img = form.cleaned_data.get("image")
-            date = form.cleaned_data.get("created_at")
-            receipt = ReceiptImage.objects.create(image = img,
-                                                  created_at = date)
-            receipt.save()
-            output = ocr_service.process_receipt(receipt.image.path)
-            products = []
-            missing_products = []
-            for product_info in output:
-                try:
-                    product_base = ProductBase.objects.get(reference = product_info['code'])
-                    product = Product.objects.create(reference = product_base,
-                                                    user = request.user)
-                    products.append(product)
-                    product.save()
-                except ObjectDoesNotExist:
-                    product = "Reference " + product_info['code'] + " can't be found in the product base."
-                    missing_products.append(product)
-                
-            response_data = {"ocr_output" : output,
-                             "products" : products,
-                             "missing_products" : missing_products}
-            return HttpResponse([output, products, missing_products], status=201)
-        else:
-            return HttpResponse("no image")
+        if not form.is_valid():
+            return render(request,"tracker/product_form_ocr.html"), {"form": form}
+
+        img = form.cleaned_data.get("image")
+        date = form.cleaned_data.get("created_at")
+        receipt = ReceiptImage.objects.create(image = img,
+                                                created_at = date)
+        
+        output = ocr_service.process_receipt(receipt.image.path)
+        
+        found_product_ids = []
+        missing_products = []
+        for product_info in output:
+            try:
+                product_base = ProductBase.objects.get(reference = product_info['code'])
+                found_product_ids.append(product_base.reference)
+            
+            except ObjectDoesNotExist:
+                missing_products.append(product_info)
+        
+        request.session['found_product_ids'] = found_product_ids
+        request.session['missing_products'] = missing_products
+        request.session["receipt_id"] = receipt.id
+
+        return redirect("tracker:ocr_form_confirmation")
+
+class OcrConfirmationView(LoginRequiredMixin, generic.View):
+    def get(self, request):
+        found_product_ids = request.session.get('found_product_ids', [])
+        missing_products = request.session.get('missing_products', [])
+
+        found_products = ProductBase.objects.filter(reference__in = found_product_ids)
+
+        context = {"found_products":found_products,
+                "missing_products":missing_products}
+
+        return render(request, "tracker/ocr_form_confirmation.html", context)
+    
+    def post(self, request):
+        selected_product_ids = request.POST.getlist('selected_products')
+        found_product_ids = request.session.get('found_product_ids', [])
+        
+        approved_ids = [ref for ref in selected_product_ids if ref in found_product_ids]
+
+        print("USER SELECTED:", selected_product_ids)
+        
+        # create Product objects
+        approved_products = ProductBase.objects.filter(reference__in=approved_ids)
+
+        for product_base in approved_products:
+            Product.objects.create(reference = product_base,
+                                            user = self.request.user)
+        for key in ("found_product_ids", "missing_products", "receipt_id"):
+            request.session.pop(key, None)
+
+        return redirect("tracker:products") 
+
 
 class ProductsView(LoginRequiredMixin, generic.ListView):
     template_name = "tracker/products.html"

@@ -11,21 +11,17 @@ class ProductBase(models.Model):
     product_name = models.CharField("Nazwa", max_length=200)
     details_link = models.URLField("Dane Produkowe", max_length=300)
     
+    class Meta:
+        ordering = ["product_name"]
+
     def __str__(self):
         return self.product_name
+        
 # Product details scrapped from Auchan side
 class ProductDetails(models.Model):
     reference = models.OneToOneField(ProductBase, on_delete=models.CASCADE, to_field='reference', primary_key=True)
-    product_brand = models.CharField('marka', max_length=200, null=True, blank=True)
-    product_weight = models.FloatField('waga', validators=[MinValueValidator(0)], null=True, blank=True)
-    product_measurement = models.CharField('jednostka opisowa', max_length=5, null=True, blank=True)
-    calories = models.FloatField('wartość energetyczna', null=True, blank=True)
-    fats = models.FloatField('tłuszcz', null=True, blank=True)
-    carbohydrates = models.FloatField('węglowodany', null=True, blank=True)
-    sugar = models.FloatField('cukry', null=True, blank=True)
-    protein = models.FloatField('białko', null=True, blank=True)
-    salt = models.FloatField('sól', null=True, blank=True)
-    category = models.CharField('kategoria', max_length=10, null=True, blank=True)
+    product_brand = models.CharField('marka', max_length=200, null=True)
+    product_description = models.CharField('marka', max_length=10000, null=True)
 
 # Product added by the user and stored in the fridge 
 class Product(models.Model):
