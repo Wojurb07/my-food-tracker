@@ -44,9 +44,9 @@ etl.log
 ####################################
 # OCR / uploaded files
 ####################################
-uploads/
-receipts/
-images/
+api/
+media/
+ocr-data
 
 ####################################
 # OS files
