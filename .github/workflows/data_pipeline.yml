@@ -1,0 +1,29 @@
+name: data-pipeline-workflow
+
+on:
+  schedule:
+    - cron: "0 1 * * SUN"
+
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+            pip install -r requirements.txt
+            python -m pip install --upgrade pip
+      - name: Run Product Base Data pipeline
+        run: |
+            python manage.py run_product_base_etl
+      - name: Run Product Details Data pipeline
+        run: |
+            python manage.py run_product_details_etl
