@@ -3,7 +3,6 @@ from tracker.etl_product_base.transform import transform_product_base
 from tracker.etl_product_base.load import load_product_base
 from django.core.management.base import BaseCommand
 import time
-import datetime
 
 class Command(BaseCommand):
     help = "Run ProductBase ETL pipeline. Data is scraped from Auchan site"

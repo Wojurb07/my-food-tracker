@@ -8,7 +8,7 @@ from django.core.validators import MinValueValidator
 class ProductBase(models.Model):
     reference = models.CharField('Referencja', max_length=8, unique=True)
     ean = models.CharField('EAN', max_length=13)
-    product_name = models.CharField("Nazwa", max_length=200)
+    product_name = models.CharField("Nazwa", max_length=100000)
     details_link = models.URLField("Dane Produkowe", max_length=300)
     
     class Meta:
@@ -20,8 +20,8 @@ class ProductBase(models.Model):
 # Product details scrapped from Auchan side
 class ProductDetails(models.Model):
     reference = models.OneToOneField(ProductBase, on_delete=models.CASCADE, to_field='reference', primary_key=True)
-    product_brand = models.CharField('marka', max_length=200, null=True)
-    product_description = models.CharField('marka', max_length=10000, null=True)
+    product_brand = models.CharField('marka', max_length=100000, null=True)
+    product_description = models.CharField('marka', max_length=100000, null=True)
 
 # Product added by the user and stored in the fridge 
 class Product(models.Model):
