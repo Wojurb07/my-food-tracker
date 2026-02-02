@@ -1,172 +1,94 @@
 /* =========================================================
-   GLOBAL RESET + TYPOGRAPHY
+   GLOBAL APP STYLE
    ========================================================= */
+
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
 
     background: url("images/background.jpg") no-repeat center center fixed;
     background-size: cover;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100vh;
+    /* Let Bootstrap handle layout — no flex here */
+    min-height: 100vh;
 }
 
-a:visited, a:hover, a:focus {
+/* Keep links clean, but don’t override Bootstrap colors */
+a {
     text-decoration: none;
-    color: #000;
 }
+
+a:hover {
+    text-decoration: underline;
+}
+
 /* =========================================================
-   LAYOUT ELEMENTS
+   BOOTSTRAP OVERRIDES (SAFE)
    ========================================================= */
 
-.navbar {
+/* Cards = your old .box */
+.card {
     background: rgba(255, 255, 255, 0.9);
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-.navbar ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.navbar ul li {
-    float: left;
-}
-.navbar ul li a {
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-.navbar ul li a:hover {
-  background-color: #afabab;
-}
-.navbar ul li a.active {
-  background-color: #afabab;
-}
-
-/* Main content box shared between index/detail pages */
-.box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px 30px;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    box-sizing: border-box;
-
-    width: 500px;
-    height: 600px;
-
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
 }
 
-/* Page header (inside .box) */
-header {
-    font-size: 1.8rem;
+/* Card headers (used as page headers) */
+.card-header {
+    font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 15px;
 }
 
 /* =========================================================
-   TABLES (used by index + detail pages)
+   TABLE POLISH (Bootstrap tables)
    ========================================================= */
 
-.table-container {
-    flex: 1; 
-    overflow-y: auto;
-}
-
-/* Base table styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
+.table {
     color: black;
 }
 
-/* Header row */
-th {
-    border-bottom: 1px solid #7a7979;
-    padding: 12px;
+/* Sticky header effect you had before */
+.table thead th {
     background: #f4f4f4;
-
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
-/* Cells */
-td, tr {
-    border-bottom: 1px solid #7a7979;
-    padding: 12px;
-}
-
-/* Hover effect for clickable rows */
-tr:hover {
-    background: rgba(0, 0, 0, 0.05);
+/* Hover feedback (Bootstrap-compatible) */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* =========================================================
-   FORMS (used in detail page)
+   FORMS (small enhancements only)
    ========================================================= */
 
-.edit-form {
-    margin-top: 20px;
+.form-control {
+    border-radius: 6px;
 }
 
-.edit-form label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.edit-form input[type="number"] {
-    width: 150px;
-    padding: 6px;
-    margin-bottom: 12px;
-}
-
-.edit-form input[type="submit"] {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 5px;
-    background: #4CAF50;
-    color: white;
+/* Make checkboxes more clickable (OCR view) */
+.form-check-input {
     cursor: pointer;
 }
 
-.edit-form input[type="submit"]:hover {
-    background: #45a049;
-}
-
 /* =========================================================
-   UTILITY CLASSES
+   UTILITIES
    ========================================================= */
 
-/* Error message */
+/* Error messages */
 .error {
     color: darkred;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
-/* Visit counter (index page) */
+/* Visit counter stays custom */
 #visitcounter {
     position: fixed;
     bottom: 10px;
     right: 10px;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.75);
     padding: 6px 10px;
     border-radius: 6px;
     font-size: 0.9rem;

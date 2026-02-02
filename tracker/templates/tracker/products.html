@@ -1,55 +1,78 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block title %}
-    Products
-{% endblock %}
+{% block title %}Products{% endblock %}
 
 {% block content %}
 
-<div class="box">
-    <header>Your products</header>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-11">
 
-    {% if product_list %}
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Reference</th>
-                        <th>Product name</th>
-                        <th>Entry date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in product_list %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'tracker:detail' product.product_id %}">
-                                    {{ product.reference.reference }}
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'tracker:detail' product.product_id %}">
-                                    {{ product.reference.product_name }}
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'tracker:detail' product.product_id %}">
-                                    {{ product.created_at|date:"SHORT_DATETIME_FORMAT" }}
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="row mb-3">
+                <div class="col">
+                    <h1 class="h3 text-center">Your products</h1>
+                </div>
+            </div>
+
+            {% if product_list %}
+
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+
+                        <!-- Scroll container -->
+                        <div class="table-responsive"
+                             style="max-height: 60vh; overflow-y: auto;">
+
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light sticky-top">
+                                    <tr>
+                                        <th>Reference</th>
+                                        <th>Product name</th>
+                                        <th>Entry date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in product_list %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'tracker:detail' product.product_id %}"
+                                                   class="text-decoration-none">
+                                                    {{ product.reference.reference }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'tracker:detail' product.product_id %}"
+                                                   class="text-decoration-none">
+                                                    {{ product.reference.product_name }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ product.created_at|date:"SHORT_DATETIME_FORMAT" }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            {% else %}
+
+                <div class="alert alert-info text-center">
+                    No products are available.
+                </div>
+
+            {% endif %}
+
+            <div class="mt-3 text-muted small text-center">
+                You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+            </div>
+
         </div>
-    {% else %}
-        <p>No products are available.</p>
-    {% endif %}
-</div>
-
-<div id="visitcounter">
-    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+    </div>
 </div>
 
 {% endblock %}

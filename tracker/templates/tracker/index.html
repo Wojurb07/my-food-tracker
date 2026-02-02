@@ -7,51 +7,76 @@
 
 {% block content %}
 
-<div class="box">
-    <header>Welcome to your e-Pantry, {{ user }}!</header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
 
-    {% if num_products == 0 %}
-        <p>No products are available.</p>
-    {% else %}
-        <p>
-            There {{ num_products|pluralize:"is,are" }}
-            {{ num_products }} product{{ num_products|pluralize }}
-            in your fridge.
-        </p>
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">
+            Welcome to your e-Pantry, {{ user }}!
+          </h5>
+        </div>
 
-        <p>
-            {{ num_products|pluralize:"These are,This is" }} the latest product{{ num_products|pluralize }} added:
-        </p>
+        <div class="card-body">
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product name</th>
-                        <th>Entry date</th>
-                    </tr>
+          {% if num_products == 0 %}
+            <div class="alert alert-warning mb-0">
+              No products are available.
+            </div>
+
+          {% else %}
+
+            <p class="lead">
+              There {{ num_products|pluralize:"is,are" }}
+              <strong>{{ num_products }}</strong>
+              product{{ num_products|pluralize }} in your fridge.
+            </p>
+
+            <p class="mb-3">
+              {{ num_products|pluralize:"These are,This is" }}
+              the latest product{{ num_products|pluralize }} added:
+            </p>
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Product name</th>
+                    <th>Entry date</th>
+                  </tr>
                 </thead>
                 <tbody>
-                    {% for product in three_latest_product %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'tracker:detail' product.product_id %}">
-                                    {{ product.reference.product_name }}
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'tracker:detail' product.product_id %}">
-                                    {{ product.created_at }}
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                  {% for product in three_latest_product %}
+                    <tr>
+                      <td>
+                        <a href="{% url 'tracker:detail' product.product_id %}"
+                           class="text-decoration-none">
+                          {{ product.reference.product_name }}
+                        </a>
+                      </td>
+                      <td>
+                        {{ product.created_at|date:"SHORT_DATETIME_FORMAT" }}
+                      </td>
+                    </tr>
+                  {% endfor %}
                 </tbody>
-            </table>
-        </div>
-    {% endif %}
+              </table>
+            </div>
 
-    <button><a href="{% url 'tracker:products' %}">Open your fridge</a></button>
+          {% endif %}
+
+        </div>
+
+        <div class="card-footer text-end">
+          <a href="{% url 'tracker:products' %}" class="btn btn-primary">
+            Open your fridge
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 {% endblock %}

@@ -1,90 +1,125 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block title %}
     Confirm Input
 {% endblock %}
 
 {% block content %}
-<div class="box">
-    <header> Modify input </header>
-    <form method="POST" enctype="multipart/form-data">
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <form method="POST">
         {% csrf_token %}
+
+        <!-- FOUND PRODUCTS -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Recognized products</h5>
+          </div>
+
+          <div class="card-body">
+
             {% if found_products %}
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product name</th>
-                                <th>Reference</th>
-                                <th>Keep</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for product in found_products %}
-                                <tr>
-                                    <td>
-                                        {{ product.product_name }}
-                                    </td>
-                                    <td>
-                                        {{ product.reference }}
-                                    </td>
-                                    <td><label>
-                                            <input
-                                            type="checkbox"
-                                            name="selected_products"
-                                            value="{{ product.reference }}"
-                                            checked
-                                            >
-                                        </label></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Product name</th>
+                      <th>Reference</th>
+                      <th class="text-center">Keep</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for product in found_products %}
+                      <tr>
+                        <td>{{ product.product_name }}</td>
+                        <td>{{ product.reference }}</td>
+                        <td class="text-center">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="selected_products"
+                            value="{{ product.reference }}"
+                            checked
+                          >
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             {% else %}
-                <p>No products were found.</p>
+              <div class="alert alert-warning mb-0">
+                No products were recognized.
+              </div>
             {% endif %}
 
+          </div>
+        </div>
+
+        <!-- MISSING PRODUCTS -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Products not found</h5>
+          </div>
+
+          <div class="card-body">
+
             {% if missing_products %}
-                <header>Products not found</header>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product Reference</th>
-                                <th>Quantity</th>
-                                <th>Keep</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for product in missing_products %}
-                            <tr>
-                                <td>
-                                    {{ product.code }}
-                                </td>
-                                <td>
-                                    {{ product.quantity }}
-                                </td>
-                                <td>
-                                    <label>
-                                        <input
-                                        type="checkbox"
-                                        name="selected_products"
-                                        value="{{ product.code }}"
-                                        checked>
-                                    </label></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% else %}
-                    <p>All codes were identified.</p>
-                {% endif %}
-            </div>
-        <input type="submit" value="Confirm">
-    </form>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Product reference</th>
+                      <th>Quantity</th>
+                      <th class="text-center">Keep</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for product in missing_products %}
+                      <tr>
+                        <td>{{ product.code }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td class="text-center">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="selected_products"
+                            value="{{ product.code }}"
+                            checked
+                          >
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% else %}
+              <div class="alert alert-success mb-0">
+                All products were identified 🎉
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{% url 'tracker:product_form_ocr' %}" class="btn btn-outline-secondary">
+            Cancel
+          </a>
+          <button type="submit" class="btn btn-primary">
+            Confirm & add products
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
 </div>
+
 {% endblock %}

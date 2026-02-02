@@ -22,7 +22,7 @@ class Command(BaseCommand):
         self.stdout.write(f"Product Base transformed in, {transform_time} seconds.")
         for product in invalid_products:
             self.stdout.write(f"Invalid product data: {product}")
-        
+
         # Load
         load_start = time.time()
         new_products, updated_products = load_product_base(cleaned_data)

@@ -1,16 +1,76 @@
 {% load static %}
-<div class="navbar">
-  <ul>
-    <li><a href="{% url 'tracker:index' %}">Home</a></li>
-    <li><a href="{% url 'tracker:products' %}">Products</a></li>
-    <li><a href="{% url 'tracker:product_form' %}">Add products</a></li>
-    <li><a href="{% url 'tracker:chart' %}">Analyze products</a></li>
-      {% if user.is_authenticated %}
-          <li><a href="{% url 'tracker:product_form_ocr' %}">Add products with AI</a></li>
-          <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
-          <li style="float:right"><a> Hi, {{user.get_username}} </a></li>
-      {% else %}
-          <li style="float:right"><a href="{% url 'login' %}">Login</a></li>
-      {% endif %}
-  </ul>
-</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="{% url 'tracker:index' %}">
+        My Food Tracker
+    </a>
+
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+
+      <!-- LEFT SIDE -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:index' %}">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:products' %}">Products</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:product_form' %}">
+            Add products
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:chart' %}">
+            Analyze products
+          </a>
+        </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:product_form_ocr' %}">
+            Add products with AI
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+
+      <!-- RIGHT SIDE -->
+      <ul class="navbar-nav ms-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <span class="navbar-text me-3">
+              Hi, {{ user.get_username }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">
+              Logout
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">
+              Login
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+
+    </div>
+  </div>
+</nav>

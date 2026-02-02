@@ -1,21 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block title %}
     Add Product
 {% endblock %}
 
 {% block content %}
-<div class="box">
-    <form method="post" class="edit-form">
-        {% csrf_token %}
-            {% if form.errors %}
-                {% for error in field.errors %}
-                    <p class="error"><strong>{{ error }}</strong></p>                
-                {% endfor %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Add product</h5>
+        </div>
+
+        <div class="card-body">
+
+          <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+              </div>
             {% endif %}
-        {{ form.reference }}
-        <input type="submit" value="Add">
-    </form>
+
+            {% bootstrap_field form.reference %}
+
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-success">
+                Add product
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+
 {% endblock %}

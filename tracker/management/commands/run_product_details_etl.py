@@ -2,6 +2,7 @@ from tracker.etl_product_details.extract import extract_product_details
 from tracker.etl_product_details.transform import transform_product_details
 from tracker.etl_product_details.load import load_product_details
 from django.core.management.base import BaseCommand
+from django.db import close_old_connections
 import time
 
 class Command(BaseCommand):
@@ -20,6 +21,9 @@ class Command(BaseCommand):
         transform_end = time.time()
         transform_time = str(transform_end - transform_start)
         self.stdout.write(f"Product Details transformed in, {transform_time} seconds.")
+
+        # Drop the DB connection before loading all the data
+        close_old_connections()
 
         # Load
         load_end = time.time()

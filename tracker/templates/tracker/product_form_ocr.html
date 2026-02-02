@@ -1,17 +1,40 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block title %}
     Upload Receipt
 {% endblock %}
 
 {% block content %}
-<div class="box">
-    <header> Add the receipt image </header>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-            {{ form.as_p }}
-        <input type="submit" value="Upload Image">
-    </form>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Add the receipt image</h5>
+        </div>
+
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-success">
+                Upload image
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
+
 {% endblock %}

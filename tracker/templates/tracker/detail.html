@@ -7,34 +7,71 @@
 
 {% block content %}
 
-<div class="box">
-    <header>{{ product.reference.product_name }}</header>
-    {% if error_message %}
-        <p class="error"><strong>{{ error_message }}</strong></p>
-    {% endif %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
 
-    <table class="detail-table">
-        <tr>
-            <td class="label">Product reference:</td>
-            <td>{{ product.reference.reference }}</td>
-        </tr>
-        <tr>
-            <td class="label">Brand:</td>
-            <td>{{ product.reference.productdetails.product_brand }}</td>
-        </tr>
-        <tr>
-            <td class="label">Description:</td>
-            <td>{{ product.reference.productdetails.product_description }}</td>
-        </tr>
-        <tr>
-            <td class="label">Date of entry:</td>
-            <td>{{ product.created_at }}</td>
-        </tr>
-    </table>
-    <div class="actions">
-    <a href="{% url 'tracker:remove_product' product.product_id %}" class="btn">
-        Remove product
-    </a>
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            {{ product.reference.product_name }}
+          </h5>
+        </div>
+
+        <div class="card-body">
+
+          {% if error_message %}
+            <div class="alert alert-danger">
+              {{ error_message }}
+            </div>
+          {% endif %}
+
+          <table class="table table-bordered align-middle">
+            <tbody>
+              <tr>
+                <th class="w-25">Product reference</th>
+                <td>{{ product.reference.reference }}</td>
+              </tr>
+
+              <tr>
+                <th>Brand</th>
+                <td>
+                  {{ product.reference.productdetails.product_brand|default:"—" }}
+                </td>
+              </tr>
+
+              <tr>
+                <th>Description</th>
+                <td style="white-space: pre-line;">
+                  {{ product.reference.productdetails.product_description|default:"—" }}
+                </td>
+              </tr>
+
+              <tr>
+                <th>Date of entry</th>
+                <td>
+                  {{ product.created_at|date:"SHORT_DATETIME_FORMAT" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{% url 'tracker:products' %}" class="btn btn-outline-secondary">
+            ← Back to products
+          </a>
+
+          <a href="{% url 'tracker:remove_product' product.product_id %}"
+             class="btn btn-danger">
+            Remove product
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 {% endblock %}
