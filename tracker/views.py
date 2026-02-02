@@ -10,8 +10,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .services import ocr_service
-import plotly.express as px
-import pandas as pd
 import torch
 from doctr.models import ocr_predictor
 from django.core.files.storage import default_storage

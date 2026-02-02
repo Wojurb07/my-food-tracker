@@ -20,5 +20,5 @@ def extract_product_details() -> list[dict]:
                    "scraped_at" : scraped_at,
                    }
         product_details.append(product) 
-
+    
     return product_details
